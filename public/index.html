@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SimpleNotes — Modern Notebook</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar container">
+      <div class="nav-brand">
+        <span class="brand-icon">📒</span>
+        <span class="brand-text">Simple<strong>Notes</strong></span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#notes-section" class="nav-link active">All Notes</a>
+        <a href="#create-section" class="nav-link">New Note</a>
+      </div>
+
+      <div class="nav-auth" id="navAuth">
+        <!-- Rendered dynamically by app.js -->
+        <button class="btn btn-outline" id="loginNavBtn">Sign In</button>
+        <button class="btn btn-primary" id="registerNavBtn">Register</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-section container">
+    <div class="hero-content">
+      <h1 id="heroGreeting">Capture Thoughts, Simply.</h1>
+      <p id="heroSubtext">A lightweight containerized notepad with token authentication and instant API sync.</p>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <main class="main-layout container">
+    <!-- Note Creation Card -->
+    <section class="card create-card" id="create-section">
+      <div class="card-header">
+        <h2>✍️ Create a New Note</h2>
+        <span class="user-badge" id="authorIndicator">Posting as: <em>Anonymous</em></span>
+      </div>
+
+      <form id="noteForm" class="note-form">
+        <div class="form-group">
+          <label for="noteTitle">Title</label>
+          <input type="text" id="noteTitle" placeholder="e.g. Docker Deployment Plan" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label for="noteText">Note Content <span class="required">*</span></label>
+          <textarea id="noteText" rows="4" placeholder="Write your thoughts, commands, or code snippets here..." required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="submitNoteBtn">Save Note</button>
+          <span class="feedback-msg" id="noteFeedback"></span>
+        </div>
+      </form>
+    </section>
+
+    <!-- Notes List Feed -->
+    <section class="notes-feed" id="notes-section">
+      <div class="feed-header">
+        <h2>📋 Recent Notes (<span id="notesCount">0</span>)</h2>
+        <button class="btn btn-ghost" id="refreshNotesBtn" title="Refresh feed">🔄 Refresh</button>
+      </div>
+
+      <div class="notes-grid" id="notesGrid">
+        <div class="loading-state">Loading notes...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Authentication Modal -->
+  <div class="modal-overlay hidden" id="authModal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="tab-group">
+          <button class="tab-btn active" id="tabLogin">Sign In</button>
+          <button class="tab-btn" id="tabRegister">Create Account</button>
+        </div>
+        <button class="close-btn" id="closeAuthModal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="auth-alert hidden" id="authAlert"></div>
+
+        <form id="authForm">
+          <div class="form-group">
+            <label for="authUsername">Username</label>
+            <input type="text" id="authUsername" placeholder="e.g. dev_engineer" required autocomplete="username">
+          </div>
+
+          <div class="form-group">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" placeholder="Min. 6 characters" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-block" id="authSubmitBtn">Sign In</button>
+        </form>
+
+        <p class="auth-hint" id="authHint">
+          Don't have an account? <a href="#" id="switchTabLink">Create one now</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
